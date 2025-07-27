@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sangam Salary Sheet</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
+    <style>
+        #salaryTable th,
+        #salaryTable td {
+            border-right: 1px solid #ddd;
+            text-align: center;
+        }
+
+        #salaryTable th:last-child,
+        #salaryTable td:last-child {
+            border-right: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h3>Sangam Bhattarai (Sr. Backend Developer)</h3>
+    <h3><p><span id="totalpending"></span></p></h3>
+
+    <table id="salaryTable" class="display">
+        <button onclick="exportToExcel()">Export to Excel</button>
+        <thead>
+            <tr>
+                <th>SN</th>
+                <th>Month</th>
+                <th>Gross Salary</th>
+                <th>Leave Days</th>
+                <th>Leave Cut</th>
+                <th>Lunch</th>
+                <th>Net Payable</th>
+                <th>Paid Amount</th>
+                <th>Bonus</th>
+                <th>Balance (+/-)</th>
+                <th>Remarks</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr class="salaryRow" id="row1">
+                <td class="sn">1</td>
+                <td class="month">Ashad (2078)</td>
+                <td class="grossSalary">16000</td>
+                <td class="leaveDays">0</td>
+                <td class="leaveCut"></td>
+                <td class="khaja">0</td>
+                <td class="netPayable"></td>
+                <td class="paidAmount">15048</td>
+                <td class="bonus">0</td>
+                <td class="balance">0</td>
+                <td class="remarks">Paid 15048 on July-16 (2078/Shrawan/1)</td>
+            </tr>
+            <tr class="salaryRow" id="row2">
+                <td class="sn">2</td>
+                <td class="month">Shrawan (2078)</td>
+                <td class="grossSalary">17000</td>
+                <td class="leaveDays">0</td>
+                <td class="leaveCut"></td>
+                <td class="khaja">0</td>
+                <td class="netPayable"></td>
+                <td class="paidAmount">15988.5</td>
+                <td class="bonus">0</td>
+                <td class="balance">0</td>
+                <td class="remarks">Paid 15988.5 on Sep-12 (2078/Bhadra/27)</td>
+            </tr>
+            <tr class="salaryRow" id="row3">
+                <td class="sn">3</td>
+                <td class="month">Bhadra (2078)</td>
+                <td class="grossSalary">17000</td>
+                <td class="leaveDays">10</td>
+                <td class="leaveCut"></td>
+                <td class="khaja">0</td>
+                <td class="netPayable"></td>
+                <td class="paidAmount">0</td>
+                <td class="bonus">0</td>
+                <td class="balance">0</td>
+                <td class="remarks"></td>
+            </tr>
+            <tr class="salaryRow" id="row4">
+                <td class="sn">4</td>
+                <td class="month">Ashoj (2078)</td>
+                <td class="grossSalary">17000</td>
+                <td class="leaveDays">0</td>
+                <td class="leaveCut"></td>
+                <td class="khaja">0</td>
+                <td class="netPayable"></td>
+                <td class="paidAmount">25988.5</td>
+                <td class="bonus">0</td>
+                <td class="balance">0</td>
+                <td class="remarks">Paid 15988.5 on Oct-8 (2078/Ashoj/22)<br>Paid 10000 on Nov-3 (2078/Kartik/17)</td>
+            </tr>
+            <tr class="salaryRow" id="row5">
+                <td class="sn">5</td>
+                <td class="month">Kartik (2078)</td>
+                <td class="grossSalary">26000</td>
+                <td class="leaveDays">0</td>
+                <td class="leaveCut"></td>
+                <td class="khaja">0</td>
+                <td class="netPayable"></td>
+                <td class="paidAmount">25338</td>
+                <td class="bonus">0</td>
+                <td class="balance">0</td>
+                <td class="remarks">Paid 25338 on Feb-8 (2078/Magh/25)</td>
+            </tr>
+            <tr class="salaryRow" id="row6">
+                <td class="sn">6</td>
+                <td class="month">Mangsir (2078)</td>
+                <td class="grossSalary">26000</td>
+                <td class="leaveDays">0</td>
+                <td class="leaveCut"></td>
+                <td class="khaja">0</td>
+                <td class="netPayable"></td>
+                <td class="paidAmount">24960</td>
+                <td class="bonus">0</td>
+                <td class="balance">0</td>
+                <td class="remarks">Paid 24960 on Feb-10 (2078/Magh/27)</td>
+            </tr>
+            <tr class="salaryRow" id="row7">
+                <td class="sn">7</td>
+                <td class="month">Poush (2078)</td>
+                <td class="grossSalary">26000</td>
+                <td class="leaveDays">0</td>
+                <td class="leaveCut"></td>
+                <td class="khaja">0</td>
+                <td class="netPayable"></td>
+                <td class="paidAmount">24960</td>
+                <td class="bonus">0</td>
+                <td class="balance">0</td>
+                <td class="remarks">Paid 24960 on Feb-20 (2078/Falgun/8)</td>
+            </tr>
+            <tr class="salaryRow" id="row8">
+                <td class="sn">8</td>
+                <td class="month">Magh (2078)</td>
+                <td class="grossSalary">26000</td>
+                <td class="leaveDays">0</td>
+                <td class="leaveCut"></td>
+                <td class="khaja">0</td>
+                <td class="netPayable"></td>
+                <td class="paidAmount">24960</td>
+                <td class="bonus">0</td>
+                <td class="balance">0</td>
+                <td class="remarks">Paid 4000 on April-13 (2078/Chaitra/30)<br>Paid 20960 on April-28 (2079/Baisakh/15)</td>
+            </tr>
+            <tr class="salaryRow" id="row9">
+                <td class="sn">9</td>
+                <td class="month">Falgun (2078)</td>
+                <td class="grossSalary">26000</td>
+                <td class="leaveDays">3</td>
+                <td class="leaveCut"></td>
+                <td class="khaja">455</td>
+                <td class="netPayable"></td>
+                <td class="paidAmount">21931</td>
+                <td class="bonus">0</td>
+                <td class="balance">0</td>
+                <td class="remarks">Paid 10000 on May-27 (2079/Jestha/13)<br>Paid 11931 on July-18 (2079/Shrawan/2)</td>
+            </tr>
+            <tr class="salaryRow" id="row10">
+                <td class="sn">10</td>
+                <td class="month">Chaitra (2078)</td>
+                <td class="grossSalary">26000</td>
+                <td class="leaveDays">0</td>
+                <td class="leaveCut"></td>
+                <td class="khaja">1230</td>
+                <td class="netPayable"></td>
+                <td class="paidAmount">23730</td>
+                <td class="bonus">0</td>
+                <td class="balance">0</td>
+                <td class="remarks">Paid 23730 on June-29 (2079/Ashad/15)</td>
+            </tr>
+            <tr class="salaryRow" id="row11">
+                <td class="sn">11</td>
+                <td class="month">Baisakh (2079)</td>
+                <td class="grossSalary">26000</td>
+                <td class="leaveDays">2</td>
+                <td class="leaveCut"></td>
+                <td class="khaja">880</td>
+                <td class="netPayable"></td>
+                <td class="paidAmount">0</td>
+                <td class="bonus">0</td>
+                <td class="balance">0</td>
+                <td class="remarks"></td>
+            </tr>
+            <tr class="salaryRow" id="row12">
+                <td class="sn">12</td>
+                <td class="month">Jestha (2079)</td>
+                <td class="grossSalary">28500</td>
+                <td class="leaveDays">16</td>
+                <td class="leaveCut"></td>
+                <td class="khaja">560</td>
+                <td class="netPayable"></td>
+                <td class="paidAmount">0</td>
+                <td class="bonus">0</td>
+                <td class="balance">0</td>
+                <td class="remarks"></td>
+            </tr>
+            <tr class="salaryRow" id="row13">
+                <td class="sn">13</td>
+                <td class="month">Ashad (2079)</td>
+                <td class="grossSalary">28500</td>
+                <td class="leaveDays">4</td>
+                <td class="leaveCut"></td>
+                <td class="khaja">0</td>
+                <td class="netPayable"></td>
+                <td class="paidAmount">0</td>
+                <td class="bonus">12226.5</td>
+                <td class="balance">0</td>
+                <td class="remarks">Annual (13 days paid leave) amount of Rs. 12226.5 calculated [(28215/30)*13]</td>
+            </tr>
+            <tr class="salaryRow" id="row14">
+                <td class="sn">14</td>
+                <td class="month">Shrawan (2079)</td>
+                <td class="grossSalary">28500</td>
+                <td class="leaveDays">5</td>
+                <td class="leaveCut"></td>
+                <td class="khaja">0</td>
+                <td class="netPayable"></td>
+                <td class="paidAmount">0</td>
+                <td class="bonus">0</td>
+                <td class="balance">0</td>
+                <td class="remarks"></td>
+            </tr>
+            <tr class="salaryRow" id="row15">
+                <td class="sn">15</td>
+                <td class="month">Bhadra (2079)</td>
+                <td class="grossSalary">28500</td>
+                <td class="leaveDays">5</td>
+                <td class="leaveCut"></td>
+                <td class="khaja">0</td>
+                <td class="netPayable"></td>
+                <td class="paidAmount">57000</td>
+                <td class="bonus">0</td>
+                <td class="balance">0</td>
+                <td class="remarks">Paid 57000 on Sep-30 (2079/Ashoj/14)</td>
+            </tr>
+            <tr class="salaryRow" id="row16">
+                <td class="sn">16</td>
+                <td class="month">Ashoj (2079)</td>
+                <td class="grossSalary">28500</td>
+                <td class="leaveDays">0</td>
+                <td class="leaveCut"></td>
+                <td class="khaja">0</td>
+                <td class="netPayable"></td>
+                <td class="paidAmount">0</td>
+                <td class="bonus">8550</td>
+                <td class="balance">0</td>
+                <td class="remarks">Dashain bonus Rs.8550 (28500*60%=17100*50%=8550) calculated</td>
+            </tr>
+            <tr class="salaryRow" id="row17">
+                <td class="sn">17</td>
+                <td class="month">Kartik (2079)</td>
+                <td class="grossSalary">28500</td>
+                <td class="leaveDays">0</td>
+                <td class="leaveCut"></td>
+                <td class="khaja">0</td>
+                <td class="netPayable"></td>
+                <td class="paidAmount">21000</td>
+                <td class="bonus">0</td>
+                <td class="balance">0</td>
+                <td class="remarks">Paid 21000 on Nov-23 (2079/Mangsir/7)</td>
+            </tr>
+            <tr class="salaryRow" id="row18">
+                <td class="sn">18</td>
+                <td class="month">Mangsir (2079)</td>
+                <td class="grossSalary">37000</td>
+                <td class="leaveDays">0</td>
+                <td class="leaveCut"></td>
+                <td class="khaja">0</td>
+                <td class="netPayable"></td>
+                <td class="paidAmount">25000</td>
+                <td class="bonus">0</td>
+                <td class="balance">0</td>
+                <td class="remarks">Paid 25000 on Dec-8 (2079/Mangsir/22)</td>
+            </tr>
+            <tr class="salaryRow" id="row19">
+                <td class="sn">19</td>
+                <td class="month">Poush (2079)</td>
+                <td class="grossSalary">37000</td>
+                <td class="leaveDays">5</td>
+                <td class="leaveCut"></td>
+                <td class="khaja">0</td>
+                <td class="netPayable"></td>
+                <td class="paidAmount">50000</td>
+                <td class="bonus">0</td>
+                <td class="balance">0</td>
+                <td class="remarks">Paid 50000 on Feb-16 (2079/Falgun/4)</td>
+            </tr>
+            <tr class="salaryRow" id="row20">
+                <td class="sn">20</td>
+                <td class="month">Magh (2079)</td>
+                <td class="grossSalary">37000</td>
+                <td class="leaveDays">0</td>
+                <td class="leaveCut"></td>
+                <td class="khaja">0</td>
+                <td class="netPayable"></td>
+                <td class="paidAmount">40000</td>
+                <td class="bonus">0</td>
+                <td class="balance">0</td>
+                <td class="remarks">Paid 40000 on April-12 (2079/Chaitra/29)</td>
+            </tr>
+            <tr class="salaryRow" id="row21">
+                <td class="sn">21</td>
+                <td class="month">Falgun (2079)</td>
+                <td class="grossSalary">37000</td>
+                <td class="leaveDays">0</td>
+                <td class="leaveCut"></td>
+                <td class="khaja">0</td>
+                <td class="netPayable"></td>
+                <td class="paidAmount">25000</td>
+                <td class="bonus">0</td>
+                <td class="balance">0</td>
+                <td class="remarks">Paid 25000 on Sep-14 (2079/Bhadra/28)</td>
+            </tr>
+            <tr class="salaryRow" id="row22">
+                <td class="sn">22</td>
+                <td class="month">Chaitra (2079)</td>
+                <td class="grossSalary">37000</td>
+                <td class="leaveDays">0</td>
+                <td class="leaveCut"></td>
+                <td class="khaja">0</td>
+                <td class="netPayable"></td>
+                <td class="paidAmount">5000</td>
+                <td class="bonus">0</td>
+                <td class="balance">0</td>
+                <td class="remarks">Paid 5000 on May-20 (2080/Jestha/6)</td>
+            </tr>
+            <tr class="salaryRow" id="row23">
+                <td class="sn">23</td>
+                <td class="month">Baisakh (2080)</td>
+                <td class="grossSalary">54000</td>
+                <td class="leaveDays">8</td>
+                <td class="leaveCut"></td>
+                <td class="khaja">0</td>
+                <td class="netPayable"></td>
+                <td class="paidAmount">35000</td>
+                <td class="bonus">0</td>
+                <td class="balance">0</td>
+                <td class="remarks">Paid 35000 cash on May-26 (2080/Jestha/12)</td>
+            </tr>
+            <tr class="salaryRow" id="row24">
+                <td class="sn">24</td>
+                <td class="month">Jestha (2080)</td>
+                <td class="grossSalary">54000</td>
+                <td class="leaveDays">0</td>
+                <td class="leaveCut"></td>
+                <td class="khaja">0</td>
+                <td class="netPayable"></td>
+                <td class="paidAmount">0</td>
+                <td class="bonus">0</td>
+                <td class="balance">0</td>
+                <td class="remarks"></td>
+            </tr>
+            <tr class="salaryRow" id="row25">
+                <td class="sn">25</td>
+                <td class="month">Ashad (2080)</td>
+                <td class="grossSalary">54000</td>
+                <td class="leaveDays">8</td>
+                <td class="leaveCut"></td>
+                <td class="khaja">0</td>
+                <td class="netPayable"></td>
+                <td class="paidAmount">85505</td>
+                <td class="bonus">22685</td>
+                <td class="balance">0</td>
+                <td class="remarks">Paid 79625 and 5880 on July-14 (2080/Ashad/29)<br>Annual (13 days paid leave) amount of Rs. 22685 calculated [(52350/30)*13]</td>
+            </tr>
+            <tr class="salaryRow" id="row26">
+                <td class="sn">26</td>
+                <td class="month">Shrawan (2080)</td>
+                <td class="grossSalary">54000</td>
+                <td class="leaveDays">9</td>
+                <td class="leaveCut"></td>
+                <td class="khaja">0</td>
+                <td class="netPayable"></td>
+                <td class="paidAmount">34027.5</td>
+                <td class="bonus">0</td>
+                <td class="balance">0</td>
+                <td class="remarks">Paid 34027.5 on Aug-30 (2080/Bhadra/13)</td>
+            </tr>
+            <tr class="salaryRow" id="row27">
+                <td class="sn">27</td>
+                <td class="month">Bhadra (2080)</td>
+                <td class="grossSalary">54000</td>
+                <td class="leaveDays">2</td>
+                <td class="leaveCut"></td>
+                <td class="khaja">0</td>
+                <td class="netPayable"></td>
+                <td class="paidAmount">46242</td>
+                <td class="bonus">0</td>
+                <td class="balance">0</td>
+                <td class="remarks">Paid 46242 on Oct-13 (2080/Ashoj/26)</td>
+            </tr>
+            <tr class="salaryRow" id="row28">
+                <td class="sn">28</td>
+                <td class="month">Ashoj (2080)</td>
+                <td class="grossSalary">54000</td>
+                <td class="leaveDays">3</td>
+                <td class="leaveCut"></td>
+                <td class="khaja">0</td>
+                <td class="netPayable"></td>
+                <td class="paidAmount">51497</td>
+                <td class="bonus">0</td>
+                <td class="balance">0</td>
+                <td class="remarks">Paid 25000 on Oct-20(2080/Kartik/3)<br>Paid 19497 and 7000 on Nov-11(2080/Kartik/25)</td>
+            </tr>
+            <tr class="salaryRow" id="row29">
+                <td class="sn">29</td>
+                <td class="month">Kartik (2080)</td>
+                <td class="grossSalary">54000</td>
+                <td class="leaveDays">0</td>
+                <td class="leaveCut"></td>
+                <td class="khaja">0</td>
+                <td class="netPayable"></td>
+                <td class="paidAmount">0</td>
+                <td class="bonus">22680</td>
+                <td class="balance">0</td>
+                <td class="remarks">Dashain bonus Rs. 22680 (54000*60%=32400*70%=22680) calculated</td>
+            </tr>
+            <tr class="salaryRow" id="row30">
+                <td class="sn">30</td>
+                <td class="month">Mangsir (2080)</td>
+                <td class="grossSalary">60000</td>
+                <td class="leaveDays">3</td>
+                <td class="leaveCut"></td>
+                <td class="khaja">0</td>
+                <td class="netPayable"></td>
+                <td class="paidAmount">98000</td>
+                <td class="bonus">11550</td>
+                <td class="balance">0</td>
+                <td class="remarks">Paid 8000 on Dec-26 (2080/Poush/10)<br>Paid 40000 on Feb-21 (2080/Falgun/9)<br>Paid 50000 on July-12 (2081/Ashad/28)<br>Annual (13 days paid leave, "6 days only considered") amount of Rs. 11550 calculated [(57750/30)*6]</td>
+            </tr>
+
+
+        </tbody>
+    </table>
+
+    <script>
+        $(document).ready(function () {
+            var runningBalance = 0;
+            $('.salaryRow').each(function () {
+                var grossSalary = parseFloat($(this).find('.grossSalary').text());
+                // var tds = parseFloat($(this).find('.tds').text());
+                var leaveDays = parseFloat($(this).find('.leaveDays').text());
+                // var netSalary = grossSalary - tds;
+                // var safetyDeposit = netSalary * (5 / 100);
+                var leaveCut = (grossSalary / 30) * leaveDays;
+                var khaja = parseFloat($(this).find('.khaja').text());
+                var netPayable = grossSalary - leaveCut - khaja;
+                var paidAmount = parseFloat($(this).find('.paidAmount').text());
+                var bonus = parseFloat($(this).find('.bonus').text());
+                var balance = netPayable + bonus - paidAmount + runningBalance;
+
+                $(this).find('.leaveCut').text(leaveCut.toFixed(2));
+                $(this).find('.netPayable').text(netPayable);
+                $(this).find('.balance').text(balance);
+                runningBalance = balance;
+            });
+
+            var totalGrossSalary = 0;
+            var totalLeaveDays = 0;
+            var totalLeaveCut = 0;
+            var totalKhaja = 0;
+            var totalNetPayable = 0;
+            var totalpaidAmount = 0;
+            var totalbonus = 0;
+            var totalbalance = 0;
+            var totalpending = 0;
+
+            $('.salaryRow').each(function () {
+                totalGrossSalary += parseFloat($(this).find('.grossSalary').text()) || 0;
+                totalLeaveDays += parseFloat($(this).find('.leaveDays').text()) || 0;
+                totalLeaveCut += parseFloat($(this).find('.leaveCut').text()) || 0;
+                totalKhaja += parseFloat($(this).find('.khaja').text()) || 0;
+                totalNetPayable += parseFloat($(this).find('.netPayable').text()) || 0;
+                totalpaidAmount += parseFloat($(this).find('.paidAmount').text()) || 0;
+                totalbonus += parseFloat($(this).find('.bonus').text()) || 0;
+                totalbalance += parseFloat($(this).find('.balance').text()) || 0;
+            });
+
+            $('#salaryTable tbody').append(
+                '<tr class="salaryRow" id="row31">' +
+                '<td class="sn">31</td>' +
+                '<td class="month">Total</td>' +
+                '<td class="grossSalary">' + totalGrossSalary + '</td>' +
+                '<td class="leaveDays">' + totalLeaveDays + '</td>' +
+                '<td class="leaveCut">' + totalLeaveCut.toFixed(2) + '</td>' +
+                '<td class="khaja">' + totalKhaja + '</td>' +
+                '<td class="netPayable">' + totalNetPayable + '</td>' +
+                '<td class="paidAmount">' + totalpaidAmount + '</td>' +
+                '<td class="bonus">' + totalbonus + '</td>' +
+                '<td class="balance"></td>' +
+                '<td class="remarks"></td>' +
+                '</tr>'
+            );
+
+            var currentDate = new Date();
+            var formattedDate = (currentDate.getMonth() + 1) + '/' + currentDate.getDate() + '/' + currentDate.getFullYear();
+
+            var totalPendingAmount = totalNetPayable + totalbonus - totalpaidAmount;
+            $('#totalpending').text('Total Pending = Rs. ' + totalPendingAmount.toFixed(2) + ' as of today(' + formattedDate + ')');
+            $('.balance', '#row31').text((runningBalance).toFixed(2));
+
+            $('.remarks', '#row31').text('Total pending amount to be received as of today(' + formattedDate + ') is Rs. ' + (totalNetPayable + totalbonus - totalpaidAmount).toFixed(2));
+
+            $('#salaryTable').DataTable({
+                paging: false
+            });
+        });
+    </script>
+
+    <script>
+        function exportToExcel() {
+
+            var table = document.getElementById('salaryTable');
+            var ws = XLSX.utils.table_to_sheet(table);
+            var wb = XLSX.utils.book_new();
+
+            XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+            XLSX.writeFile(wb, 'sangam_sheet.xlsx');
+        }
+    </script>
+
+</body>
+
+</html>
