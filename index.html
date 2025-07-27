@@ -212,9 +212,9 @@
                 <td class="khaja">0</td>
                 <td class="netPayable"></td>
                 <td class="paidAmount">0</td>
-                <td class="bonus">12226.5</td>
+                <td class="bonus">12350</td>
                 <td class="balance">0</td>
-                <td class="remarks">Annual (13 days paid leave) amount of Rs. 12226.5 calculated [(28215/30)*13]</td>
+                <td class="remarks">Annual (13 days paid leave) amount of Rs. 12350 calculated [(28500/30)*13]</td>
             </tr>
             <tr class="salaryRow" id="row14">
                 <td class="sn">14</td>
@@ -368,9 +368,9 @@
                 <td class="khaja">0</td>
                 <td class="netPayable"></td>
                 <td class="paidAmount">85505</td>
-                <td class="bonus">22685</td>
+                <td class="bonus">23400</td>
                 <td class="balance">0</td>
-                <td class="remarks">Paid 79625 and 5880 on July-14 (2080/Ashad/29)<br>Annual (13 days paid leave) amount of Rs. 22685 calculated [(52350/30)*13]</td>
+                <td class="remarks">Paid 79625 and 5880 on July-14 (2080/Ashad/29)<br>Annual (13 days paid leave) amount of Rs. 23400 calculated [(54000/30)*13]</td>
             </tr>
             <tr class="salaryRow" id="row26">
                 <td class="sn">26</td>
@@ -433,9 +433,9 @@
                 <td class="khaja">0</td>
                 <td class="netPayable"></td>
                 <td class="paidAmount">98000</td>
-                <td class="bonus">11550</td>
+                <td class="bonus">12000</td>
                 <td class="balance">0</td>
-                <td class="remarks">Paid 8000 on Dec-26 (2080/Poush/10)<br>Paid 40000 on Feb-21 (2080/Falgun/9)<br>Paid 50000 on July-12 (2081/Ashad/28)<br>Annual (13 days paid leave, "6 days only considered") amount of Rs. 11550 calculated [(57750/30)*6]</td>
+                <td class="remarks">Paid 8000 on Dec-26 (2080/Poush/10)<br>Paid 40000 on Feb-21 (2080/Falgun/9)<br>Paid 50000 on July-12 (2081/Ashad/28)<br>Annual (13 days paid leave, "6 days only considered") amount of Rs. 12000 calculated [(60000/30)*6]</td>
             </tr>
 
 
@@ -459,8 +459,8 @@
                 var balance = netPayable + bonus - paidAmount + runningBalance;
 
                 $(this).find('.leaveCut').text(leaveCut.toFixed(2));
-                $(this).find('.netPayable').text(netPayable);
-                $(this).find('.balance').text(balance);
+                $(this).find('.netPayable').text(netPayable.toFixed(2));
+                $(this).find('.balance').text(balance.toFixed(2));
                 runningBalance = balance;
             });
 
@@ -493,7 +493,7 @@
                 '<td class="leaveDays">' + totalLeaveDays + '</td>' +
                 '<td class="leaveCut">' + totalLeaveCut.toFixed(2) + '</td>' +
                 '<td class="khaja">' + totalKhaja + '</td>' +
-                '<td class="netPayable">' + totalNetPayable + '</td>' +
+                '<td class="netPayable">' + totalNetPayable.toFixed(2) + '</td>' +
                 '<td class="paidAmount">' + totalpaidAmount + '</td>' +
                 '<td class="bonus">' + totalbonus + '</td>' +
                 '<td class="balance"></td>' +
